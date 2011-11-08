@@ -1,0 +1,53 @@
+﻿@model AntiCustomerServiceSystem.Models.Call
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Call</legend>
+
+    <div class="display-label">StartTime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartTime)
+    </div>
+
+    <div class="display-label">EndTime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndTime)
+    </div>
+
+    <div class="display-label">ServiceRep</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ServiceRep)
+    </div>
+
+    <div class="display-label">Reference</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Reference)
+    </div>
+
+    <div class="display-label">Notes</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">Promises</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Promises)
+    </div>
+
+    <div class="display-label">Resolution</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Resolution)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

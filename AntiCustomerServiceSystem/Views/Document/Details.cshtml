@@ -1,0 +1,30 @@
+﻿@model AntiCustomerServiceSystem.Models.Document
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Document</legend>
+
+    <div class="display-label">URI</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.URI)
+    </div>
+
+    <div class="display-label">Created</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Created)
+    </div>
+
+    <div class="display-label">Modified</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Modified)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

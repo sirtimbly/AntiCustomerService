@@ -1,0 +1,33 @@
+﻿@model AntiCustomerServiceSystem.Models.FollowUp
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>FollowUp</legend>
+
+    <div class="display-label">Created</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Created)
+    </div>
+
+    <div class="display-label">ActionTime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActionTime)
+    </div>
+
+    <div class="display-label">Action</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Action)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

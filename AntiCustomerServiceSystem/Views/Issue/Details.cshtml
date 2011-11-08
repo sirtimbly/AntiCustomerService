@@ -1,0 +1,46 @@
+﻿@model AntiCustomerServiceSystem.Models.Issue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Issue</legend>
+
+    <div class="display-label">Opened</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Opened)
+    </div>
+
+    <div class="display-label">Closed</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Closed)
+    </div>
+
+    <div class="display-label">Modified</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Modified)
+    </div>
+
+    <div class="display-label">State</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+</fieldset>
+<div clas="sub-item-container">	
+	<h3>Companies on this Issue</h3>
+<ul id="companies">
+	@foreach (AntiCustomerServiceSystem.Models.Company item in Model.Companies)
+	{
+	 <li>@Html.ActionLink(item.Name, "Details", "Company") [@item.MainPhone]</li>
+	}
+</ul>
+	<div>@Html.ActionLink("Add Company to Issue", "ListPicker", "Company", new { issueId = Model.Id }, null)</div>
+</div>	
+<p>
+	@Html.ActionLink("Log First Call", "Create", "Call", new { issueId = Model.Id }, null) |	 
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

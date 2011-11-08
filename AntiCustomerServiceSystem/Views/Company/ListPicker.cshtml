@@ -1,0 +1,17 @@
+﻿@model IEnumerable<AntiCustomerServiceSystem.Models.Company>
+
+@{
+	ViewBag.Title = "ListPicker";
+}
+
+<h2>ListPicker</h2>
+
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+<ul class="company-picker">
+@foreach (var item in Model) {
+	<li>@Html.ActionLink(item.Name, "AssignToIssue", "Company", new {issueId = ViewBag.IssueId, companyId = item.Id}, null)</li>
+}
+</ul>
+

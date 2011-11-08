@@ -1,0 +1,10 @@
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\AntiCustomerServiceSystem.dll
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\AntiCustomerServiceSystem.pdb
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\Elmah.dll
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\EntityFramework.dll
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\log4net.dll
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\EntityFramework.xml
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\log4net.xml
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\obj\Debug\ResolveAssemblyReference.cache
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\obj\Debug\AntiCustomerServiceSystem.dll
+c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\obj\Debug\AntiCustomerServiceSystem.pdb

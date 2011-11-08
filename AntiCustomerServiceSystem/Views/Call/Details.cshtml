@@ -1,0 +1,50 @@
+﻿@model AntiCustomerServiceSystem.Models.Call
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Call</legend>
+
+    <div class="display-label">StartTime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartTime)
+    </div>
+
+    <div class="display-label">EndTime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndTime)
+    </div>
+
+    <div class="display-label">ServiceRep</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ServiceRep)
+    </div>
+
+    <div class="display-label">Reference</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Reference)
+    </div>
+
+    <div class="display-label">Notes</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">Promises</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Promises)
+    </div>
+
+    <div class="display-label">Resolution</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Resolution)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

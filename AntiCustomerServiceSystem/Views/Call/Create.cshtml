@@ -1,0 +1,81 @@
+﻿@model AntiCustomerServiceSystem.Models.Call
+
+@{
+	ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+	@Html.ValidationSummary(true)
+	<fieldset>
+		<legend>Call</legend>
+		<input type="hidden" name="issueId" value="@ViewBag.IssueId" />
+		<div class="editor-label">
+			@Html.LabelFor(model => model.StartTime)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.StartTime)
+			@Html.ValidationMessageFor(model => model.StartTime)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.EndTime)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.EndTime)
+			@Html.ValidationMessageFor(model => model.EndTime)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.ServiceRep)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.ServiceRep)
+			@Html.ValidationMessageFor(model => model.ServiceRep)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Reference)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Reference)
+			@Html.ValidationMessageFor(model => model.Reference)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Notes)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Notes)
+			@Html.ValidationMessageFor(model => model.Notes)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Promises)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Promises)
+			@Html.ValidationMessageFor(model => model.Promises)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Resolution)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Resolution)
+			@Html.ValidationMessageFor(model => model.Resolution)
+		</div>
+
+		<p>
+			<input type="submit" value="Create" />
+		</p>
+	</fieldset>
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>

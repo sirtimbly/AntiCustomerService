@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ServiceSystem" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="ServiceSystemContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Companies" EntityType="ServiceSystem.Company" />
+    <EntitySet Name="Issues" EntityType="ServiceSystem.Issue" />
+    <AssociationSet Name="CompanyIssue" Association="ServiceSystem.CompanyIssue">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Issue" EntitySet="Issues" />
+    </AssociationSet>
+    <EntitySet Name="Calls" EntityType="ServiceSystem.Call" />
+    <AssociationSet Name="IssueCall" Association="ServiceSystem.IssueCall">
+      <End Role="Issue" EntitySet="Issues" />
+      <End Role="Call" EntitySet="Calls" />
+    </AssociationSet>
+    <EntitySet Name="Documents" EntityType="ServiceSystem.Document" />
+    <AssociationSet Name="CompanyDocument" Association="ServiceSystem.CompanyDocument">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Document" EntitySet="Documents" />
+    </AssociationSet>
+    <EntitySet Name="FollowUps" EntityType="ServiceSystem.FollowUp" />
+    <AssociationSet Name="CallFollowUp" Association="ServiceSystem.CallFollowUp">
+      <End Role="Call" EntitySet="Calls" />
+      <End Role="FollowUp" EntitySet="FollowUps" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="MainPhone" Nullable="true" />
+    <Property Type="String" Name="Account" Nullable="true" />
+    <NavigationProperty Name="Issues" Relationship="ServiceSystem.CompanyIssue" FromRole="Company" ToRole="Issue" />
+    <NavigationProperty Name="Documents" Relationship="ServiceSystem.CompanyDocument" FromRole="Company" ToRole="Document" />
+  </EntityType>
+  <EntityType Name="Issue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Companies" Relationship="ServiceSystem.CompanyIssue" FromRole="Issue" ToRole="Company" />
+    <Property Type="DateTime" Name="Opened" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Type="DateTime" Name="Closed" Nullable="true" />
+    <Property Type="DateTime" Name="Modified" Nullable="true" />
+    <Property Type="String" Name="State" Nullable="false" />
+    <NavigationProperty Name="Calls" Relationship="ServiceSystem.IssueCall" FromRole="Issue" ToRole="Call" />
+  </EntityType>
+  <Association Name="CompanyIssue">
+    <End Type="ServiceSystem.Company" Role="Company" Multiplicity="*" />
+    <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Call">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="StartTime" Nullable="true" />
+    <Property Type="DateTime" Name="EndTime" Nullable="true" />
+    <Property Type="String" Name="ServiceRep" Nullable="true" />
+    <Property Type="String" Name="Reference" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="Promises" Nullable="true" />
+    <Property Type="String" Name="Resolution" Nullable="true" />
+    <NavigationProperty Name="Issue" Relationship="ServiceSystem.IssueCall" FromRole="Call" ToRole="Issue" />
+    <NavigationProperty Name="FollowUps" Relationship="ServiceSystem.CallFollowUp" FromRole="Call" ToRole="FollowUp" />
+  </EntityType>
+  <Association Name="IssueCall">
+    <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="1" />
+    <End Type="ServiceSystem.Call" Role="Call" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="URI" Nullable="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <Property Type="DateTime" Name="Modified" Nullable="true" />
+    <NavigationProperty Name="Company" Relationship="ServiceSystem.CompanyDocument" FromRole="Document" ToRole="Company" />
+  </EntityType>
+  <Association Name="CompanyDocument">
+    <End Type="ServiceSystem.Company" Role="Company" Multiplicity="1" />
+    <End Type="ServiceSystem.Document" Role="Document" Multiplicity="*" />
+  </Association>
+  <EntityType Name="FollowUp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <Property Type="DateTime" Name="ActionTime" Nullable="true" />
+    <Property Type="String" Name="Action" Nullable="true" />
+    <NavigationProperty Name="Call" Relationship="ServiceSystem.CallFollowUp" FromRole="FollowUp" ToRole="Call" />
+  </EntityType>
+  <Association Name="CallFollowUp">
+    <End Type="ServiceSystem.Call" Role="Call" Multiplicity="1" />
+    <End Type="ServiceSystem.FollowUp" Role="FollowUp" Multiplicity="*" />
+  </Association>
+</Schema>

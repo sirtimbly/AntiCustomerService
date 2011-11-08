@@ -1,0 +1,30 @@
+﻿@model AntiCustomerServiceSystem.Models.FollowUp
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>FollowUp</legend>
+
+    <div class="display-label">Created</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Created)
+    </div>
+
+    <div class="display-label">ActionTime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActionTime)
+    </div>
+
+    <div class="display-label">Action</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Action)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
