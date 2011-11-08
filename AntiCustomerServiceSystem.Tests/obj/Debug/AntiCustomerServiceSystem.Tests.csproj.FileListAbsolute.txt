@@ -8,3 +8,13 @@ c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\
 c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\obj\Debug\ResolveAssemblyReference.cache
 c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\obj\Debug\AntiCustomerServiceSystem.Tests.dll
 c:\users\tbendt\documents\visual studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\obj\Debug\AntiCustomerServiceSystem.Tests.pdb
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\bin\Debug\AntiCustomerServiceSystem.Tests.dll.config
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\bin\Debug\AntiCustomerServiceSystem.Tests.dll
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\bin\Debug\AntiCustomerServiceSystem.Tests.pdb
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\bin\Debug\AntiCustomerServiceSystem.dll
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\bin\Debug\EntityFramework.dll
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\bin\Debug\AntiCustomerServiceSystem.pdb
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\bin\Debug\EntityFramework.xml
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\obj\Debug\AntiCustomerServiceSystem.Tests.dll
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem.Tests\obj\Debug\AntiCustomerServiceSystem.Tests.pdb

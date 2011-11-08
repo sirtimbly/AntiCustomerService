@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/07/2011 19:28:13
--- Generated from EDMX file: C:\Users\tbendt\Documents\Visual Studio 2010\Projects\AntiCustomerServiceSystem\AntiCustomerServiceSystem\Models\ServiceSystem.edmx
+-- Date Created: 11/08/2011 16:08:12
+-- Generated from EDMX file: C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem\Models\ServiceSystem.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -75,7 +75,9 @@ CREATE TABLE [dbo].[Issues] (
     [Opened] datetime  NOT NULL,
     [Closed] datetime  NULL,
     [Modified] datetime  NULL,
-    [State] nvarchar(max)  NOT NULL
+    [State] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NULL,
+    [Details] nvarchar(max)  NULL
 );
 GO
 
@@ -99,7 +101,8 @@ CREATE TABLE [dbo].[Documents] (
     [URI] nvarchar(max)  NOT NULL,
     [Created] datetime  NOT NULL,
     [Modified] datetime  NULL,
-    [Company_Id] int  NOT NULL
+    [Company_Id] int  NULL,
+    [Issue_Id] int  NULL
 );
 GO
 
@@ -193,7 +196,7 @@ ADD CONSTRAINT [FK_IssueCall]
     FOREIGN KEY ([Issue_Id])
     REFERENCES [dbo].[Issues]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_IssueCall'
 CREATE INDEX [IX_FK_IssueCall]
@@ -221,12 +224,26 @@ ADD CONSTRAINT [FK_CallFollowUp]
     FOREIGN KEY ([Call_Id])
     REFERENCES [dbo].[Calls]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CallFollowUp'
 CREATE INDEX [IX_FK_CallFollowUp]
 ON [dbo].[FollowUps]
     ([Call_Id]);
+GO
+
+-- Creating foreign key on [Issue_Id] in table 'Documents'
+ALTER TABLE [dbo].[Documents]
+ADD CONSTRAINT [FK_DocumentIssue]
+    FOREIGN KEY ([Issue_Id])
+    REFERENCES [dbo].[Issues]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DocumentIssue'
+CREATE INDEX [IX_FK_DocumentIssue]
+ON [dbo].[Documents]
+    ([Issue_Id]);
 GO
 
 -- --------------------------------------------------

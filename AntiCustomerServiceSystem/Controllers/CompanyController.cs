@@ -33,8 +33,9 @@ namespace AntiCustomerServiceSystem.Controllers
 		//
 		// GET: /Company/Create
 
-		public ActionResult Create()
+		public ActionResult Create(int? issueId = null)
 		{
+			ViewBag.IssueId = issueId;
 			return View();
 		} 
 
@@ -42,11 +43,21 @@ namespace AntiCustomerServiceSystem.Controllers
 		// POST: /Company/Create
 
 		[HttpPost]
-		public ActionResult Create(Company company)
+		public ActionResult Create(Company company, int? issueId = null)
 		{
+
 			if (ModelState.IsValid)
 			{
 				db.Companies.Add(company);
+				if (issueId != null) 
+				{
+					Issue associated = db.Issues.Find(issueId);
+					associated.Companies.Add(company);
+					db.Entry(associated).State = EntityState.Modified;
+					db.SaveChanges();
+					return RedirectToAction("Details", "Issue", associated);  
+				}
+					
 				db.SaveChanges();
 				return RedirectToAction("Index");  
 			}
@@ -111,13 +122,11 @@ namespace AntiCustomerServiceSystem.Controllers
 			List<Company> companies = db.Companies.ToList();
 			if (issueId != null)
 			{
-				Issue issue = db.Issues.Find(issueId);
-				excluded = issue.Companies.ToList();
-				
+				companies = db.Companies.Where(item => !item.Issues.Any(t => t.Id == issueId)).ToList();
 			}
 			ViewBag.IssueId = issueId;
 			
-			return View();
+			return View(companies);
 		}
 
 		public ActionResult AssignToIssue(int companyId, int issueId)
@@ -125,6 +134,16 @@ namespace AntiCustomerServiceSystem.Controllers
 			Company company = db.Companies.Find(companyId);
 			Issue issue = db.Issues.Find(issueId);
 			issue.Companies.Add(company);
+			db.Entry(issue).State = EntityState.Modified;
+			db.SaveChanges();
+			return RedirectToAction("Details", "Issue", issue);
+		}
+
+		public ActionResult RemoveFromIssue(int companyId, int issueId)
+		{
+			Company company = db.Companies.Find(companyId);
+			Issue issue = db.Issues.Find(issueId);
+			issue.Companies.Remove(company);
 			db.Entry(issue).State = EntityState.Modified;
 			db.SaveChanges();
 			return RedirectToAction("Details", "Issue", issue);

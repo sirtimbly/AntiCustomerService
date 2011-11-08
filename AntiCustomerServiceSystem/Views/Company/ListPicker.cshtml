@@ -4,14 +4,16 @@
 	ViewBag.Title = "ListPicker";
 }
 
-<h2>ListPicker</h2>
-
-<p>
-	@Html.ActionLink("Create New", "Create")
-</p>
+<h2>Choose Company</h2>
+@if (Model.Count() == 0)
+{
+	<p class="error">No Companies Available. @Html.ActionLink("Create One", "Create", "Company", new { issueId = ViewBag.IssueId }, null)</p>
+}
 <ul class="company-picker">
 @foreach (var item in Model) {
 	<li>@Html.ActionLink(item.Name, "AssignToIssue", "Company", new {issueId = ViewBag.IssueId, companyId = item.Id}, null)</li>
 }
 </ul>
+
+<a href="/issue/Details/@ViewBag.IssueId">Cancel</a>
 

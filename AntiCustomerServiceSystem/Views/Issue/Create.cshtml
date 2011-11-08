@@ -45,7 +45,7 @@
             @Html.EditorFor(model => model.State)
             @Html.ValidationMessageFor(model => model.State)
         </div>
-
+		<input type="hidden" name="wizard" value="@ViewBag.Wizard" />
         <p>
             <input type="submit" value="Create" />
         </p>

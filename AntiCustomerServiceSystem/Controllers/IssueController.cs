@@ -33,7 +33,7 @@ namespace AntiCustomerServiceSystem.Controllers
 		//
 		// GET: /Issue/Create
 
-		public ActionResult Create(int? companyId = null)
+		public ActionResult Create(int? companyId = null, bool wizard = false)
 		{
 			if (companyId != null)
 			{
@@ -48,8 +48,8 @@ namespace AntiCustomerServiceSystem.Controllers
 			};
 			db.Issues.Add(newIssue);
 			db.SaveChanges();
-			
-			return View("Details", newIssue);
+			ViewBag.Wizard = wizard;
+			return View("Edit", newIssue);
 		} 
 
 		//
@@ -64,6 +64,7 @@ namespace AntiCustomerServiceSystem.Controllers
 					issue.Companies.Add(db.Companies.Find(companyId));
 				db.Issues.Add(issue);
 				db.SaveChanges();
+				
 				return RedirectToAction("Index");  
 			}
 
@@ -83,12 +84,14 @@ namespace AntiCustomerServiceSystem.Controllers
 		// POST: /Issue/Edit/5
 
 		[HttpPost]
-		public ActionResult Edit(Issue issue)
+		public ActionResult Edit(Issue issue, bool wizard = false)
 		{
 			if (ModelState.IsValid)
 			{
 				db.Entry(issue).State = EntityState.Modified;
 				db.SaveChanges();
+				if (wizard)
+					return RedirectToAction("Create", "Call", new { issueId = issue.Id });
 				return RedirectToAction("Index");
 			}
 			return View(issue);

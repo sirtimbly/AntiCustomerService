@@ -22,6 +22,10 @@
       <End Role="Call" EntitySet="Calls" />
       <End Role="FollowUp" EntitySet="FollowUps" />
     </AssociationSet>
+    <AssociationSet Name="DocumentIssue" Association="ServiceSystem.DocumentIssue">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="Issue" EntitySet="Issues" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Company">
     <Key>
@@ -45,6 +49,9 @@
     <Property Type="DateTime" Name="Modified" Nullable="true" />
     <Property Type="String" Name="State" Nullable="false" />
     <NavigationProperty Name="Calls" Relationship="ServiceSystem.IssueCall" FromRole="Issue" ToRole="Call" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="String" Name="Details" Nullable="true" />
+    <NavigationProperty Name="Documents" Relationship="ServiceSystem.DocumentIssue" FromRole="Issue" ToRole="Document" />
   </EntityType>
   <Association Name="CompanyIssue">
     <End Type="ServiceSystem.Company" Role="Company" Multiplicity="*" />
@@ -66,7 +73,9 @@
     <NavigationProperty Name="FollowUps" Relationship="ServiceSystem.CallFollowUp" FromRole="Call" ToRole="FollowUp" />
   </EntityType>
   <Association Name="IssueCall">
-    <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="1" />
+    <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ServiceSystem.Call" Role="Call" Multiplicity="*" />
   </Association>
   <EntityType Name="Document">
@@ -78,9 +87,10 @@
     <Property Type="DateTime" Name="Created" Nullable="false" />
     <Property Type="DateTime" Name="Modified" Nullable="true" />
     <NavigationProperty Name="Company" Relationship="ServiceSystem.CompanyDocument" FromRole="Document" ToRole="Company" />
+    <NavigationProperty Name="Issue" Relationship="ServiceSystem.DocumentIssue" FromRole="Document" ToRole="Issue" />
   </EntityType>
   <Association Name="CompanyDocument">
-    <End Type="ServiceSystem.Company" Role="Company" Multiplicity="1" />
+    <End Type="ServiceSystem.Company" Role="Company" Multiplicity="0..1" />
     <End Type="ServiceSystem.Document" Role="Document" Multiplicity="*" />
   </Association>
   <EntityType Name="FollowUp">
@@ -94,7 +104,13 @@
     <NavigationProperty Name="Call" Relationship="ServiceSystem.CallFollowUp" FromRole="FollowUp" ToRole="Call" />
   </EntityType>
   <Association Name="CallFollowUp">
-    <End Type="ServiceSystem.Call" Role="Call" Multiplicity="1" />
+    <End Type="ServiceSystem.Call" Role="Call" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="ServiceSystem.FollowUp" Role="FollowUp" Multiplicity="*" />
+  </Association>
+  <Association Name="DocumentIssue">
+    <End Type="ServiceSystem.Document" Role="Document" Multiplicity="*" />
+    <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="0..1" />
   </Association>
 </Schema>

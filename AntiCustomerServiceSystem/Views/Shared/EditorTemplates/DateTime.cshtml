@@ -1,0 +1,16 @@
+﻿@model DateTime?
+
+@if (Model != null)
+{
+	if (!Model.HasValue)
+	{
+		@Html.TextBox("", "", new { @class = "datepicker" })
+	}
+	else
+	{ 
+		@Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new { @class = "datepicker" })
+	}
+}
+else { 
+	@Html.TextBox("", "", new { @class = "datepicker" })
+}

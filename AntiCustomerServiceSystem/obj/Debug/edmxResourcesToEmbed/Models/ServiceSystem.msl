@@ -19,6 +19,8 @@
           <ScalarProperty Name="Closed" ColumnName="Closed" />
           <ScalarProperty Name="Modified" ColumnName="Modified" />
           <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -79,6 +81,7 @@
       <EndProperty Name="Document">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Company_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="CallFollowUp" TypeName="ServiceSystem.CallFollowUp" StoreEntitySet="FollowUps">
       <EndProperty Name="Call">
@@ -87,6 +90,15 @@
       <EndProperty Name="FollowUp">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DocumentIssue" TypeName="ServiceSystem.DocumentIssue" StoreEntitySet="Documents">
+      <EndProperty Name="Issue">
+        <ScalarProperty Name="Id" ColumnName="Issue_Id" />
+      </EndProperty>
+      <EndProperty Name="Document">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Issue_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

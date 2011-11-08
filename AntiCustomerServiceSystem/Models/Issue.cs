@@ -18,6 +18,7 @@ namespace AntiCustomerServiceSystem.Models
         {
             this.Companies = new HashSet<Company>();
             this.Calls = new HashSet<Call>();
+            this.Documents = new HashSet<Document>();
         }
     
         public int Id { get; set; }
@@ -25,9 +26,12 @@ namespace AntiCustomerServiceSystem.Models
         public Nullable<System.DateTime> Closed { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public string State { get; set; }
+        public string Name { get; set; }
+        public string Details { get; set; }
     
         public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<Call> Calls { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
     
 }

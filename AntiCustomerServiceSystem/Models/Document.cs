@@ -20,6 +20,7 @@ namespace AntiCustomerServiceSystem.Models
         public Nullable<System.DateTime> Modified { get; set; }
     
         public virtual Company Company { get; set; }
+        public virtual Issue Issue { get; set; }
     }
     
 }

@@ -37,13 +37,21 @@
             @Html.EditorFor(model => model.Account)
             @Html.ValidationMessageFor(model => model.Account)
         </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+		<div class="actionbar">
+		@if (ViewBag.IssueId != null)
+		{
+			<input type="hidden" name="issueId" value="@ViewBag.IssueId" />
+			<input type="submit" value="Create &amp; Add to Issue" />
+			<a href="/issue/@ViewBag.IssueId">Cancel</a>
+		}
+		else
+		{ 
+		
+            <input type="submit" value="Create" />  
+			@Html.ActionLink("Back to List", "Index")
+		}
+		</div>
+        
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

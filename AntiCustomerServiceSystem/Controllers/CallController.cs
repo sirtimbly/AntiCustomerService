@@ -30,13 +30,24 @@ namespace AntiCustomerServiceSystem.Controllers
 			return View(call);
 		}
 
+
+		public ActionResult NewWizard()
+		{
+			List<Issue> issues = db.Issues.ToList();
+			return View(issues);
+		}
+
 		//
 		// GET: /Call/Create
 
 		public ActionResult Create(int issueId)
 		{
 			ViewBag.IssueId = issueId;
-			return View();
+			Call newCall = new Call()
+			{
+				StartTime = DateTime.Now
+			};
+			return View(newCall);
 		} 
 
 		//
@@ -45,14 +56,15 @@ namespace AntiCustomerServiceSystem.Controllers
 		[HttpPost]
 		public ActionResult Create(Call call, FormCollection form)
 		{
+			int? issueId = int.Parse(form["issueId"]);
 			if (ModelState.IsValid)
 			{
-				if (!String.IsNullOrWhiteSpace(form["issueId"]))
-					call.Issue = db.Issues.Where(i => i.Id == int.Parse(form["issueId"])).FirstOrDefault();
+				if (issueId > 0)
+					call.Issue = db.Issues.Where(i => i.Id == issueId).FirstOrDefault();
 
 				db.Calls.Add(call);
 				db.SaveChanges();
-				return RedirectToAction("Index");  
+				return RedirectToAction("Details", "Issue", db.Issues.Find(issueId));  
 			}
 
 			return View(call);
@@ -77,7 +89,7 @@ namespace AntiCustomerServiceSystem.Controllers
 			{
 				db.Entry(call).State = EntityState.Modified;
 				db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Details", call);
 			}
 			return View(call);
 		}
