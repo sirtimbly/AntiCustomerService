@@ -18,3 +18,4 @@ C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\log4net.dll
 C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\EntityFramework.xml
 C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\log4net.xml
 C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem\obj\Debug\AntiCustomerServiceSystem.pdb
+C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem\bin\Microsoft.Web.Helpers.dll

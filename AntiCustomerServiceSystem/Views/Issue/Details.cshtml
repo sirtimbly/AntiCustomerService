@@ -72,7 +72,7 @@
 <ul id="calls">
 	@foreach (AntiCustomerServiceSystem.Models.Document item in Model.Documents)
 	{
-	 <li><a href="/document/details/@item.Id">@item.URI</a> @item.Modified</li>
+	 <li><a href="@item.URI">@Path.GetFileName(item.URI)</a> @item.Modified</li>
 	}
 </ul>
 	
