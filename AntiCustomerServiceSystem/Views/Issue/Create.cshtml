@@ -1,7 +1,7 @@
 ﻿@model AntiCustomerServiceSystem.Models.Issue
 
 @{
-    ViewBag.Title = "Create";
+	ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
@@ -10,48 +10,48 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Issue</legend>
+	@Html.ValidationSummary(true)
+	<fieldset>
+		<legend>Issue</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Opened)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Opened)
-            @Html.ValidationMessageFor(model => model.Opened)
-        </div>
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Opened)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Opened)
+			@Html.ValidationMessageFor(model => model.Opened)
+		</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Closed)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Closed)
-            @Html.ValidationMessageFor(model => model.Closed)
-        </div>
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Closed)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Closed)
+			@Html.ValidationMessageFor(model => model.Closed)
+		</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Modified)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Modified)
-            @Html.ValidationMessageFor(model => model.Modified)
-        </div>
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Modified)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Modified)
+			@Html.ValidationMessageFor(model => model.Modified)
+		</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.State)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.State)
-            @Html.ValidationMessageFor(model => model.State)
-        </div>
+		<div class="editor-label">
+			@Html.LabelFor(model => model.State)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.State)
+			@Html.ValidationMessageFor(model => model.State)
+		</div>
 		<input type="hidden" name="wizard" value="@ViewBag.Wizard" />
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+		<p>
+			<input type="submit" value="Create" />
+		</p>
+	</fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Back to List", "Index")
 </div>

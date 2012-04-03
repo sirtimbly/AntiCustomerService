@@ -18,6 +18,9 @@ namespace AntiCustomerServiceSystem.Models
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> ActionTime { get; set; }
         public string Action { get; set; }
+        public string State { get; set; }
+        public Nullable<short> Outcome { get; set; }
+        public Nullable<short> Timeliness { get; set; }
     
         public virtual Call Call { get; set; }
     }

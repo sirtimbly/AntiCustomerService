@@ -1,0 +1,67 @@
+﻿@model ServiceBlazerMVC4.Models.Issue
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+	<legend>Issue</legend>
+	<div class="display-label">Name</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Name)
+	</div>
+	<div class="display-label">Details</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Details)
+	</div>
+
+	<div class="display-label">Opened</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Opened)
+	</div>
+
+	<div class="display-label">Closed</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Closed)
+	</div>
+
+	<div class="display-label">Modified</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Modified)
+	</div>
+
+	<div class="display-label">State</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.State)
+	</div>
+</fieldset>
+<div clas="sub-item-container">	
+<h3>Companies on this Issue</h3>
+<ul id="companies">
+
+</ul>
+	<div>@Html.ActionLink("Add Company to Issue", "ListPicker", "Company", new { issueId = Model.Id }, null)</div>
+</div>
+<div clas="sub-item-container">	
+	<h3>Calls on this Issue</h3>
+<ul id="calls">
+	
+</ul>
+	
+</div>	
+
+<div clas="sub-item-container">	
+	<h3>Documents on this Issue</h3>
+<ul id="calls">
+	
+</ul>
+	
+	<div>@Html.ActionLink("Upload Document", "Create", "Document", new { issueId = Model.Id }, null)</div>
+
+</div>	
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

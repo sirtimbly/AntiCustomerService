@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>@ViewBag.Title - My ASP.NET MVC Application</title>
+		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/css")" rel="stylesheet" type="text/css" />
+		<link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/themes/base/css")" rel="stylesheet" type="text/css" />
+		<script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js")"></script>
+		<meta name="viewport" content="width=device-width" />
+	</head>
+	<body>
+	<div class="page">
+		<header>
+			<div id="title">
+				<h1>ServiceBlazer</h1>
+			</div>
+			<div id="logindisplay">
+				@Html.Partial("_LoginPartial")
+			</div>
+			<nav>
+				<ul id="menu">
+					<li>@Html.ActionLink("Home", "Index", "Home")</li>
+					<li>@Html.ActionLink("New Call", "NewWizard", "Call")</li>
+					<li>@Html.ActionLink("Companies", "Index", "Company")</li>
+					<li>@Html.ActionLink("Issues", "Index", "Issue")</li>
+				</ul>
+			</nav>
+		</header>
+		<section id="main">
+			@RenderBody()
+		</section>
+		<footer>
+			Footer.
+		</footer>
+	</div>
+</body>
+</html>
+</html>

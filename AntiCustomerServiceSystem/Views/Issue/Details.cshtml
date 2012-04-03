@@ -1,41 +1,41 @@
 ﻿@model AntiCustomerServiceSystem.Models.Issue
 
 @{
-    ViewBag.Title = "Details";
+	ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
 
 <fieldset>
-    <legend>Issue</legend>
+	<legend>Issue</legend>
 	<div class="display-label">Name</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Name)
+	</div>
 	<div class="display-label">Details</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Details)
-    </div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Details)
+	</div>
 
-    <div class="display-label">Opened</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Opened)
-    </div>
+	<div class="display-label">Opened</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Opened)
+	</div>
 
-    <div class="display-label">Closed</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Closed)
-    </div>
+	<div class="display-label">Closed</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Closed)
+	</div>
 
-    <div class="display-label">Modified</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Modified)
-    </div>
+	<div class="display-label">Modified</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.Modified)
+	</div>
 
-    <div class="display-label">State</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.State)
-    </div>
+	<div class="display-label">State</div>
+	<div class="display-field">
+		@Html.DisplayFor(model => model.State)
+	</div>
 </fieldset>
 <div clas="sub-item-container">	
 <h3>Companies on this Issue</h3>
@@ -72,7 +72,7 @@
 <ul id="calls">
 	@foreach (AntiCustomerServiceSystem.Models.Document item in Model.Documents)
 	{
-	 <li><a href="@item.URI">@Path.GetFileName(item.URI)</a> @item.Modified</li>
+	 <li><a href="@item.URI" target="_blank">@Path.GetFileName(item.URI)</a> @item.Modified @Html.ActionLink("Delete", "Delete", "Document", new { id = item.Id }, null)</li>
 	}
 </ul>
 	
@@ -81,5 +81,5 @@
 </div>	
 <p>
 	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Back to List", "Index")
 </p>

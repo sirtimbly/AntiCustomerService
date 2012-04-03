@@ -27,9 +27,12 @@ namespace AntiCustomerServiceSystem.Models
         public string Notes { get; set; }
         public string Promises { get; set; }
         public string Resolution { get; set; }
+        public Nullable<short> Outcome { get; set; }
+        public Nullable<int> CompanyId { get; set; }
     
         public virtual Issue Issue { get; set; }
         public virtual ICollection<FollowUp> FollowUps { get; set; }
+        public virtual Company Company { get; set; }
     }
     
 }

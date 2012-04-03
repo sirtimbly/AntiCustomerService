@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntiCustomerServiceSystem",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntiCustomerServiceSystem.Tests", "AntiCustomerServiceSystem.Tests\AntiCustomerServiceSystem.Tests.csproj", "{4317D87F-E16B-478B-9474-F0D86F7AB429}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBlazerMVC4", "ServiceBlazerMVC4\ServiceBlazerMVC4.csproj", "{33F32D74-66F0-4D88-8179-74EAD5B530B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{4317D87F-E16B-478B-9474-F0D86F7AB429}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4317D87F-E16B-478B-9474-F0D86F7AB429}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4317D87F-E16B-478B-9474-F0D86F7AB429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F32D74-66F0-4D88-8179-74EAD5B530B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F32D74-66F0-4D88-8179-74EAD5B530B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F32D74-66F0-4D88-8179-74EAD5B530B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F32D74-66F0-4D88-8179-74EAD5B530B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

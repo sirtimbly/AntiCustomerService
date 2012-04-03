@@ -59,7 +59,7 @@ namespace AntiCustomerServiceSystem.Controllers
 				document.Issue = issue;
 				db.Documents.Add(document);
 				db.SaveChanges();
-				return RedirectToAction("Details", "Issue", issue);
+				return RedirectToAction("Details", "Issue", new { id = issue.Id });
 			}
 			if (!String.IsNullOrWhiteSpace(form["companyId"]))
 			{
@@ -67,7 +67,7 @@ namespace AntiCustomerServiceSystem.Controllers
 				document.Company = company;
 				db.Documents.Add(document);
 				db.SaveChanges();
-				return RedirectToAction("Details", "Company", company);
+				return RedirectToAction("Details", "Company", new { id = company.Id });
 			}
 
 			return RedirectToAction("Index");

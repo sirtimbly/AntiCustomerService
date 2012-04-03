@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ServiceSystem.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ServiceSystemStoreContainer">
+    <EntitySet Name="Companies" EntityType="ServiceSystem.Store.Companies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Issues" EntityType="ServiceSystem.Store.Issues" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Calls" EntityType="ServiceSystem.Store.Calls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents" EntityType="ServiceSystem.Store.Documents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FollowUps" EntityType="ServiceSystem.Store.FollowUps" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanyIssue" EntityType="ServiceSystem.Store.CompanyIssue" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CompanyIssue_Company" Association="ServiceSystem.Store.FK_CompanyIssue_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="CompanyIssue" EntitySet="CompanyIssue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyIssue_Issue" Association="ServiceSystem.Store.FK_CompanyIssue_Issue">
+      <End Role="Issue" EntitySet="Issues" />
+      <End Role="CompanyIssue" EntitySet="CompanyIssue" />
+    </AssociationSet>
+    <AssociationSet Name="IssueCall" Association="ServiceSystem.Store.IssueCall">
+      <End Role="Issue" EntitySet="Issues" />
+      <End Role="Call" EntitySet="Calls" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyDocument" Association="ServiceSystem.Store.CompanyDocument">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Document" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="CallFollowUp" Association="ServiceSystem.Store.CallFollowUp">
+      <End Role="Call" EntitySet="Calls" />
+      <End Role="FollowUp" EntitySet="FollowUps" />
+    </AssociationSet>
+    <AssociationSet Name="DocumentIssue" Association="ServiceSystem.Store.DocumentIssue">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="Issue" EntitySet="Issues" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Companies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MainPhone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Account" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Issues">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Opened" Type="datetime" Nullable="false" />
+    <Property Name="Closed" Type="datetime" Nullable="true" />
+    <Property Name="Modified" Type="datetime" Nullable="true" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Calls">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="true" />
+    <Property Name="EndTime" Type="datetime" Nullable="true" />
+    <Property Name="ServiceRep" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Reference" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Promises" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Resolution" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Issue_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="URI" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Modified" Type="datetime" Nullable="true" />
+    <Property Name="Company_Id" Type="int" Nullable="true" />
+    <Property Name="Issue_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="FollowUps">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="ActionTime" Type="datetime" Nullable="true" />
+    <Property Name="Action" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Call_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyIssue">
+    <Key>
+      <PropertyRef Name="Companies_Id" />
+      <PropertyRef Name="Issues_Id" />
+    </Key>
+    <Property Name="Companies_Id" Type="int" Nullable="false" />
+    <Property Name="Issues_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="IssueCall">
+    <End Role="Issue" Type="ServiceSystem.Store.Issues" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Call" Type="ServiceSystem.Store.Calls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Call">
+        <PropertyRef Name="Issue_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyDocument">
+    <End Role="Company" Type="ServiceSystem.Store.Companies" Multiplicity="0..1" />
+    <End Role="Document" Type="ServiceSystem.Store.Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CallFollowUp">
+    <End Role="Call" Type="ServiceSystem.Store.Calls" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FollowUp" Type="ServiceSystem.Store.FollowUps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Call">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FollowUp">
+        <PropertyRef Name="Call_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DocumentIssue">
+    <End Role="Document" Type="ServiceSystem.Store.Documents" Multiplicity="*" />
+    <End Role="Issue" Type="ServiceSystem.Store.Issues" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="Issue_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyIssue_Company">
+    <End Role="Company" Type="ServiceSystem.Store.Companies" Multiplicity="1" />
+    <End Role="CompanyIssue" Type="ServiceSystem.Store.CompanyIssue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyIssue">
+        <PropertyRef Name="Companies_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyIssue_Issue">
+    <End Role="CompanyIssue" Type="ServiceSystem.Store.CompanyIssue" Multiplicity="*" />
+    <End Role="Issue" Type="ServiceSystem.Store.Issues" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyIssue">
+        <PropertyRef Name="Issues_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

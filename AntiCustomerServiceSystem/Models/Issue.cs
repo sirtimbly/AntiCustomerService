@@ -28,6 +28,8 @@ namespace AntiCustomerServiceSystem.Models
         public string State { get; set; }
         public string Name { get; set; }
         public string Details { get; set; }
+        public string Resolution { get; set; }
+        public Nullable<short> Outcome { get; set; }
     
         public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<Call> Calls { get; set; }

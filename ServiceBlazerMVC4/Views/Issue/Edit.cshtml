@@ -1,0 +1,73 @@
+﻿@model ServiceBlazerMVC4.Models.Issue
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("Edit", "Issue")) {
+	@Html.ValidationSummary(true)
+	<fieldset>
+		<legend>Issue</legend>
+
+		@Html.HiddenFor(model => model.Id)
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Name)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Name)
+			@Html.ValidationMessageFor(model => model.Name)
+		</div>
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Details)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.Details)
+			@Html.ValidationMessageFor(model => model.Details)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Opened)
+		</div>
+		<div class="editor-field">
+			@Html.DisplayFor(model => model.Opened)
+			@Html.HiddenFor(model => model.Opened)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Closed)
+		</div>
+		<div class="editor-field">
+			@Html.DisplayFor(model => model.Closed)
+			@Html.HiddenFor(model => model.Closed)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.Modified)
+		</div>
+		<div class="editor-field">
+			@Html.DisplayFor(model => model.Modified)
+			@Html.HiddenFor(model => model.Closed)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(model => model.State)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.State)
+			@Html.ValidationMessageFor(model => model.State)
+		</div>
+		<input type="hidden" name="wizard" value="@ViewBag.Wizard" />
+		<p>
+			<input type="submit" value="Save" />
+		</p>
+	</fieldset>
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>

@@ -207,6 +207,10 @@
             <End Role="Document" EntitySet="Documents" />
             <End Role="Issue" EntitySet="Issues" />
           </AssociationSet>
+          <AssociationSet Name="CallCompany" Association="ServiceSystem.CallCompany">
+            <End Role="Call" EntitySet="Calls" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Company">
           <Key>
@@ -218,6 +222,7 @@
           <Property Type="String" Name="Account" Nullable="true" />
           <NavigationProperty Name="Issues" Relationship="ServiceSystem.CompanyIssue" FromRole="Company" ToRole="Issue" />
           <NavigationProperty Name="Documents" Relationship="ServiceSystem.CompanyDocument" FromRole="Company" ToRole="Document" />
+          <NavigationProperty Name="Calls" Relationship="ServiceSystem.CallCompany" FromRole="Company" ToRole="Call" />
         </EntityType>
         <EntityType Name="Issue">
           <Key>
@@ -233,6 +238,8 @@
           <Property Type="String" Name="Name" Nullable="true" />
           <Property Type="String" Name="Details" Nullable="true" />
           <NavigationProperty Name="Documents" Relationship="ServiceSystem.DocumentIssue" FromRole="Issue" ToRole="Document" />
+          <Property Type="String" Name="Resolution" Nullable="true" />
+          <Property Type="Int16" Name="Outcome" Nullable="true" />
         </EntityType>
         <Association Name="CompanyIssue">
           <End Type="ServiceSystem.Company" Role="Company" Multiplicity="*" />
@@ -252,6 +259,9 @@
           <Property Type="String" Name="Resolution" Nullable="true" />
           <NavigationProperty Name="Issue" Relationship="ServiceSystem.IssueCall" FromRole="Call" ToRole="Issue" />
           <NavigationProperty Name="FollowUps" Relationship="ServiceSystem.CallFollowUp" FromRole="Call" ToRole="FollowUp" />
+          <Property Type="Int16" Name="Outcome" Nullable="true" />
+          <NavigationProperty Name="Company" Relationship="ServiceSystem.CallCompany" FromRole="Call" ToRole="Company" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
         </EntityType>
         <Association Name="IssueCall">
           <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="1" >
@@ -283,6 +293,9 @@
           <Property Type="DateTime" Name="ActionTime" Nullable="true" />
           <Property Type="String" Name="Action" Nullable="true" />
           <NavigationProperty Name="Call" Relationship="ServiceSystem.CallFollowUp" FromRole="FollowUp" ToRole="Call" />
+          <Property Type="String" Name="State" Nullable="true" />
+          <Property Type="Int16" Name="Outcome" Nullable="true" />
+          <Property Type="Int16" Name="Timeliness" Nullable="true" />
         </EntityType>
         <Association Name="CallFollowUp">
           <End Type="ServiceSystem.Call" Role="Call" Multiplicity="1" >
@@ -294,6 +307,18 @@
         <Association Name="DocumentIssue">
           <End Type="ServiceSystem.Document" Role="Document" Multiplicity="*" />
           <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="0..1" />
+        </Association>
+        <Association Name="CallCompany">
+          <End Type="ServiceSystem.Call" Role="Call" Multiplicity="*" />
+          <End Type="ServiceSystem.Company" Role="Company" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Call">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -420,32 +445,36 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="ServiceSystem" >
-        <EntityTypeShape EntityType="ServiceSystem.Company" Width="1.5" PointX="2.625" PointY="1.75" Height="1.7566536458333339" />
-        <EntityTypeShape EntityType="ServiceSystem.Issue" Width="1.5" PointX="5.75" PointY="1.75" Height="2.4140429687499996" />
+        <EntityTypeShape EntityType="ServiceSystem.Company" Width="1.5" PointX="0.5" PointY="4.25" Height="2.085348307291667" />
+        <EntityTypeShape EntityType="ServiceSystem.Issue" Width="1.5" PointX="5.75" PointY="1.75" Height="2.9070849609374996" />
         <AssociationConnector Association="ServiceSystem.CompanyIssue">
-          <ConnectorPoint PointX="4.125" PointY="2.71050048828125" />
-          <ConnectorPoint PointX="5.75" PointY="2.71050048828125" />
+          <ConnectorPoint PointX="1.21376354895362" PointY="4.25" />
+          <ConnectorPoint PointX="1.21376354895362" PointY="2.65625" />
+          <ConnectorPoint PointX="5.75" PointY="2.65625" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="ServiceSystem.Call" Width="1.5" PointX="5.75" PointY="5.125" Height="2.4140429687499996" />
+        <EntityTypeShape EntityType="ServiceSystem.Call" Width="1.5" PointX="5.75" PointY="6.125" Height="3.0714322916666656" />
         <AssociationConnector Association="ServiceSystem.IssueCall">
-          <ConnectorPoint PointX="6.5" PointY="4.16404296875" />
-          <ConnectorPoint PointX="6.5" PointY="5.125" />
+          <ConnectorPoint PointX="6.5" PointY="4.6570849609375" />
+          <ConnectorPoint PointX="6.5" PointY="6.125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="ServiceSystem.Document" Width="1.5" PointX="2.625" PointY="5.125" Height="1.7566536458333335" />
+        <EntityTypeShape EntityType="ServiceSystem.Document" Width="1.5" PointX="3" PointY="3.625" Height="1.9210009765624996" />
         <AssociationConnector Association="ServiceSystem.CompanyDocument">
-          <ConnectorPoint PointX="3.375" PointY="3.6710009765625" />
-          <ConnectorPoint PointX="3.375" PointY="5.125" />
+          <ConnectorPoint PointX="2" PointY="4.89800048828125" />
+          <ConnectorPoint PointX="3" PointY="4.89800048828125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="ServiceSystem.FollowUp" Width="1.5" PointX="8.625" PointY="5.75" Height="1.5923063151041665" />
+        <EntityTypeShape EntityType="ServiceSystem.FollowUp" Width="1.5" PointX="8.625" PointY="6.625" Height="2.2496956380208317" />
         <AssociationConnector Association="ServiceSystem.CallFollowUp">
-          <ConnectorPoint PointX="7.25" PointY="6.6283268229166667" />
-          <ConnectorPoint PointX="8.625" PointY="6.6283268229166667" />
+          <ConnectorPoint PointX="7.25" PointY="7.7498478190104159" />
+          <ConnectorPoint PointX="8.625" PointY="7.7498478190104159" />
         </AssociationConnector>
         <AssociationConnector Association="ServiceSystem.DocumentIssue">
-          <ConnectorPoint PointX="4.125" PointY="5.125" />
-          <ConnectorPoint PointX="4.5" PointY="4.75" />
-          <ConnectorPoint PointX="4.5" PointY="3.4688280818684891" />
-          <ConnectorPoint PointX="5.75" PointY="3.4688280818684891" />
+          <ConnectorPoint PointX="4.5" PointY="4.14104248046875" />
+          <ConnectorPoint PointX="5.75" PointY="4.14104248046875" />
+        </AssociationConnector>
+        <AssociationConnector Association="ServiceSystem.CallCompany">
+          <ConnectorPoint PointX="5.75" PointY="8.2774666341145817" />
+          <ConnectorPoint PointX="1.25" PointY="8.2774666341145817" />
+          <ConnectorPoint PointX="1.25" PointY="6.3353483072916674" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
