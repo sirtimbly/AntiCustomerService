@@ -22,11 +22,21 @@ namespace AntiCustomerServiceSystem.Controllers
 		}
 
 		//
+		// GET: /issue/menu
+		[ChildActionOnly]
+		public ActionResult Menu()
+		{
+			return PartialView(db.Issues.OrderBy(i=>i.Opened).ToList());
+		}
+
+		//
 		// GET: /Issue/Details/5
 
 		public ViewResult Details(int id)
 		{
+			
 			Issue issue = db.Issues.Find(id);
+			HttpContext.Application["activeIssueId"] = id;
 			return View(issue);
 		}
 

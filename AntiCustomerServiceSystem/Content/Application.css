@@ -1,0 +1,52 @@
+﻿ body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+
+
+/* issues */
+
+.issue-title 
+{
+	padding:2px 6px 10px 6px;
+	font-size:24px;
+	font-weight:bold;
+	color:#5b5b5b;
+}
+
+.issue-actions 
+{
+	float:right;
+	padding:2px;
+}
+
+.issue-actions a 
+{
+	display:inline-block;
+	margin:0 0 0 12px;
+}
+
+.issue-header-sub 
+{
+	background:#e7e7e7;
+	margin:0 0 0px 0;
+	min-height:22px;
+}
+
+.issue-header-sub .display-label
+{
+	float:left;
+	font-weight:bold;
+	padding:2px 8px;
+	min-height:18px;
+}
+
+
+.issue-header-sub .display-field
+{
+	float:left;
+	padding:2px 8px;
+	border-right:1px solid #b5b5b5;
+	min-height:18px;
+}
+

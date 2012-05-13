@@ -1,0 +1,16 @@
+﻿@model IEnumerable<AntiCustomerServiceSystem.Models.Issue>
+
+<ul class="nav nav-list">
+	<li class="nav-header">Issues</li>
+	@foreach (Issue item in Model)
+	{
+
+	 string className = "";
+	 if (App["activeIssueId"] == item.Id) { className = "active"; }
+		<li class="@className">
+			<a href="@Url.Action("Details", "Issue", new { id = item.Id })">@item.Name</a>
+		</li>  
+	}
+	
+
+</ul>

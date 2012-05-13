@@ -1,85 +1,99 @@
 ﻿@model AntiCustomerServiceSystem.Models.Issue
 
 @{
-    ViewBag.Title = "Details";
+	ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
 
-<fieldset>
-    <legend>Issue</legend>
-	<div class="display-label">Name</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-	<div class="display-label">Details</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Details)
-    </div>
-
-    <div class="display-label">Opened</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Opened)
-    </div>
-
-    <div class="display-label">Closed</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Closed)
-    </div>
-
-    <div class="display-label">Modified</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Modified)
-    </div>
-
-    <div class="display-label">State</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.State)
-    </div>
-</fieldset>
-<div clas="sub-item-container">	
-<h3>Companies on this Issue</h3>
-<ul id="companies">
-	@foreach (AntiCustomerServiceSystem.Models.Company item in Model.Companies)
-	{
-	 <li>@Html.ActionLink(item.Name, "Details", "Company") @item.MainPhone @Html.ActionLink("Remove", "RemoveFromIssue", "Company", new {issueId = Model.Id, companyId = item.Id}, null)</li>
-	}
+<div class="well issue-header">
+	<div class="issue-actions">
+		<a href="@Url.Action("Archive", "Issue", new { issueId = Model.Id })"><i class="icon-folder-open"></i> Edit</a>
+		<a href="@Url.Action("Edit", "Issue", new { issueId = Model.Id })"><i class="icon-pencil"></i> Edit</a>
+	</div>
+	<div class=" issue-title">
+		@Html.DisplayFor(model => model.Name)
+	</div>
 	
-</ul>
-	<div>@Html.ActionLink("Add Company to Issue", "ListPicker", "Company", new { issueId = Model.Id }, null)</div>
+	<div class="issue-header-sub">
+		<div class="display-label">Opened</div>
+		<div class="display-field">
+			@Html.DisplayFor(model => model.Opened)
+		</div>
+		
+		@if (Model.Closed.HasValue)
+		{
+		<div class="display-label">Closed</div>
+		<div class="display-field">
+			@Html.DisplayFor(model => model.Closed)
+		</div>
+		}
+		@if (Model.Modified.HasValue)
+		{ 
+		<div class="display-label">Modified</div>
+		<div class="display-field">
+			@Html.DisplayFor(model => model.Modified)
+		</div>
+		}
+		<div class="display-label">State</div>
+		<div class="display-field">
+			@Html.DisplayFor(model => model.State)
+		</div>
+	</div>
 </div>
-<div clas="sub-item-container">	
-	<h3>Calls on this Issue</h3>
-<ul id="calls">
-	@foreach (AntiCustomerServiceSystem.Models.Call item in Model.Calls)
-	{
-	 <li><a href="/call/details/@item.Id">Call with @item.ServiceRep on @item.StartTime</a></li>
-	}
-</ul>
-	@if (Model.Calls.Count() > 0)
-	 {
-		<div>@Html.ActionLink("Add Call", "Create", "Call", new { issueId = Model.Id }, null)</div>
-	 }
-	 else 
-	 { 
-		<div>@Html.ActionLink("Log First Call", "Create", "Call", new { issueId = Model.Id }, null)</div>
-	 }
+<div class="row">
+	<div class="span5">
+	<div class="sub-item-container">	
+			<h3>Calls on this Issue</h3>
+			<ul id="calls">
+				@foreach (AntiCustomerServiceSystem.Models.Call item in Model.Calls)
+				{
+				 <li><a href="/call/details/@item.Id">Call with @item.ServiceRep on @item.StartTime</a></li>
+				}
+			</ul>
+				@if (Model.Calls.Count() > 0)
+				 {
+					<div>@Html.ActionLink("Add Call", "Create", "Call", new { issueId = Model.Id }, null)</div>
+				 }
+				 else 
+				 { 
+					<div>@Html.ActionLink("Log First Call", "Create", "Call", new { issueId = Model.Id }, null)</div>
+				 }
 	
-</div>	
+		</div>
 
-<div clas="sub-item-container">	
-	<h3>Documents on this Issue</h3>
-<ul id="calls">
-	@foreach (AntiCustomerServiceSystem.Models.Document item in Model.Documents)
-	{
-	 <li><a href="@item.URI">@Path.GetFileName(item.URI)</a> @item.Modified</li>
-	}
-</ul>
+	</div>
+	<div class="span4">
+		
+		<div class="sub-item-container well">	
+		<h3>Companies on this Issue</h3>
+		<ul id="companies">
+			@foreach (AntiCustomerServiceSystem.Models.Company item in Model.Companies)
+			{
+			 <li>@Html.ActionLink(item.Name, "Details", "Company") @item.MainPhone @Html.ActionLink("Remove", "RemoveFromIssue", "Company", new {issueId = Model.Id, companyId = item.Id}, null)</li>
+			}
 	
-	<div>@Html.ActionLink("Upload Document", "Create", "Document", new { issueId = Model.Id }, null)</div>
+		</ul>
+			<div>@Html.ActionLink("Add Company to Issue", "ListPicker", "Company", new { issueId = Model.Id }, null)</div>
+		</div>	
 
-</div>	
+		<div class="sub-item-container well">	
+				<h3>Documents on this Issue</h3>
+			<ul id="calls">
+				@foreach (AntiCustomerServiceSystem.Models.Document item in Model.Documents)
+				{
+				 <li><a href="@item.URI">@Path.GetFileName(item.URI)</a> @item.Modified</li>
+				}
+			</ul>
+	
+			<div>@Html.ActionLink("Upload Document", "Create", "Document", new { issueId = Model.Id }, null)</div>
+
+		</div>	
+	</div>
+</div>
+
+
 <p>
 	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Back to List", "Index")
 </p>
