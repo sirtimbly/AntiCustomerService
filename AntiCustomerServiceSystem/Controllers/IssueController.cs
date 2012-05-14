@@ -18,7 +18,7 @@ namespace AntiCustomerServiceSystem.Controllers
 
 		public ViewResult Index()
 		{
-			return View(db.Issues.ToList());
+			return View(db.Issues.Where(i => i.State != IssueState.CLOSED).ToList());
 		}
 
 		//
@@ -26,7 +26,15 @@ namespace AntiCustomerServiceSystem.Controllers
 		[ChildActionOnly]
 		public ActionResult Menu()
 		{
-			return PartialView(db.Issues.OrderBy(i=>i.Opened).ToList());
+			return PartialView(db.Issues.Where(i => i.State != IssueState.CLOSED).OrderBy(i => i.Opened).ToList());
+		}
+
+		//
+		// GET: /Issue/Archived
+
+		public ViewResult Archived()
+		{
+			return View(db.Issues.Where(i=>i.State == IssueState.CLOSED).ToList());
 		}
 
 		//
@@ -72,13 +80,15 @@ namespace AntiCustomerServiceSystem.Controllers
 			{
 				if (companyId != null)
 					issue.Companies.Add(db.Companies.Find(companyId));
+
+				issue.Modified = issue.Opened = DateTime.Now;
 				db.Issues.Add(issue);
 				db.SaveChanges();
 				
 				return RedirectToAction("Index");  
 			}
-
-			return View(issue);
+			ViewBag.Title = "New Issue";
+			return View("Details", issue);
 		}
 		
 		//
@@ -87,6 +97,7 @@ namespace AntiCustomerServiceSystem.Controllers
 		public ActionResult Edit(int id)
 		{
 			Issue issue = db.Issues.Find(id);
+			ViewBag.Title = "Edit Issue";
 			return View(issue);
 		}
 
@@ -98,6 +109,7 @@ namespace AntiCustomerServiceSystem.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				issue.Modified = DateTime.Now;
 				db.Entry(issue).State = EntityState.Modified;
 				db.SaveChanges();
 				if (wizard)
@@ -132,6 +144,19 @@ namespace AntiCustomerServiceSystem.Controllers
 		{
 			db.Dispose();
 			base.Dispose(disposing);
+		}
+
+		//
+		// GET: /Issue/Archive
+
+		public ActionResult Archive(int id)
+		{
+			Issue issue = db.Issues.Find(id);
+			issue.State = IssueState.CLOSED;
+			issue.Modified = issue.Closed = DateTime.Now;
+			db.Entry(issue).State = EntityState.Modified;
+			db.SaveChanges();
+			return RedirectToAction("Index");
 		}
 	}
 }

@@ -9,73 +9,82 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Create", "Call", FormMethod.Post, new { @class = "form-horizontal" }))
+{
 	@Html.ValidationSummary(true)
 	<fieldset>
 		<legend>Call</legend>
-		<input type="hidden" name="issueId" value="@ViewBag.IssueId" />
-		<div class="editor-label">
-			@Html.LabelFor(model => model.StartTime)
+		<input type="hidden" name="issueId" value="@Model.Issue.Id" />
+		<div class="control-group">
+			<div class="control-label">
+				@Html.LabelFor(model => model.StartTime)
+			</div>
+			<div class="controls">
+				@Html.EditorFor(model => model.StartTime)
+				@Html.ValidationMessageFor(model => model.StartTime)
+			</div>
 		</div>
-		<div class="editor-field">
-			@Html.EditorFor(model => model.StartTime)
-			@Html.ValidationMessageFor(model => model.StartTime)
-		</div>
-
-		<div class="editor-label">
+		<div class="control-group">
+		<div class="control-label">
 			@Html.LabelFor(model => model.EndTime)
 		</div>
-		<div class="editor-field">
+		<div class="controls">
 			@Html.EditorFor(model => model.EndTime)
 			@Html.ValidationMessageFor(model => model.EndTime)
 		</div>
-
-		<div class="editor-label">
+		</div>
+		<div class="control-group">
+		<div class="control-label">
 			@Html.LabelFor(model => model.ServiceRep)
 		</div>
-		<div class="editor-field">
+		<div class="controls">
 			@Html.EditorFor(model => model.ServiceRep)
 			@Html.ValidationMessageFor(model => model.ServiceRep)
 		</div>
-
-		<div class="editor-label">
+		</div>
+		<div class="control-group">
+		<div class="control-label">
 			@Html.LabelFor(model => model.Reference)
 		</div>
-		<div class="editor-field">
+		<div class="controls">
 			@Html.EditorFor(model => model.Reference)
 			@Html.ValidationMessageFor(model => model.Reference)
 		</div>
-
-		<div class="editor-label">
+		</div>
+		<div class="control-group">
+		<div class="control-label">
 			@Html.LabelFor(model => model.Notes)
 		</div>
-		<div class="editor-field">
+		<div class="controls">
 			@Html.EditorFor(model => model.Notes)
 			@Html.ValidationMessageFor(model => model.Notes)
 		</div>
-
-		<div class="editor-label">
+		</div>
+		<div class="control-group">
+		<div class="control-label">
 			@Html.LabelFor(model => model.Promises)
 		</div>
-		<div class="editor-field">
+		<div class="controls">
 			@Html.EditorFor(model => model.Promises)
 			@Html.ValidationMessageFor(model => model.Promises)
 		</div>
-
-		<div class="editor-label">
+		</div>
+		<div class="control-group">
+		<div class="control-label">
 			@Html.LabelFor(model => model.Resolution)
 		</div>
-		<div class="editor-field">
+		<div class="controls">
 			@Html.EditorFor(model => model.Resolution)
 			@Html.ValidationMessageFor(model => model.Resolution)
 		</div>
+		</div>
 
-		<p>
-			<input type="submit" value="Create" />
-		</p>
+		<div class="form-actions">
+			<input type="submit" value="Create" class="btn btn-primary" />
+		</div>
 	</fieldset>
 }
 
 <div>
-	@Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Back to Issue", "Details", "Issue", new { id = Model.Issue.Id }, null)
 </div>

@@ -1,8 +1,28 @@
 ﻿ body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
+	padding-top: 60px;
+	padding-bottom: 40px;
+	background:url('/Images/background-gray.jpg');
+	}
 
+.container.service-blazer 
+{
+	width:992px;
+	background:url('/Images/container-bg.png') repeat-y;
+	box-shadow:0px 0px 12px #222;
+	border-top:6px solid #56544d;
+	border-bottom:6px solid #56544d;
+	padding:18px 0;
+}
+
+.service-sidebar 
+{
+	padding-left:16px;
+}
+
+.service-content 
+{
+	padding-right:16px;
+}
 
 /* issues */
 
@@ -50,3 +70,14 @@
 	min-height:18px;
 }
 
+.issue-menu-actions 
+{
+	margin:12px;
+	padding:12px;
+	width:70%;
+}
+
+.issue-menu-actions .btn 
+{
+	width:100%;
+}

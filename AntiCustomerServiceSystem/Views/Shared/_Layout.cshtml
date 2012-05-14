@@ -21,15 +21,7 @@
 			<div class="container-fluid">
 				<a class="brand" href="#">Service Blazer</a>
 				<div class="btn-group pull-right">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-user"></i> Username
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Profile</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Sign Out</a></li>
-					</ul>
+					@Html.Partial("_LogOnPartial")
 				</div>
 
 				<div class="nav-collapse">
@@ -43,25 +35,16 @@
 			</div>
 		  </div>
 		</div>
-		<div class="container">
-		<div class="row">
-			<div class="span3">
-			<div id="logindisplay">
-				@Html.Partial("_LogOnPartial")
-				<div class="">
-					@{Html.RenderAction("Menu", "Issue");}
+		<div class="container service-blazer">
+			<div class="row">
+				<div class="span3 service-sidebar">
+				@{Html.RenderAction("Menu", "Issue");}
+				</div>
+				<div class="span9 service-content">
+					@RenderBody()
 				</div>
 			</div>
-			</div>
-			<div class="span9">
-				@RenderBody()
-			</div>
 		</div>
-		
-		
-		
-		</div>
-	
 		<footer>
 		</footer>
 	</div>

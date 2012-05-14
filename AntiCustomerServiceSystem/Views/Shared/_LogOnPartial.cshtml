@@ -1,7 +1,17 @@
 ﻿@if(Request.IsAuthenticated) {
-    <text>Welcome <strong>@User.Identity.Name</strong>!
-    [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+	<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		<i class="icon-user"></i> @User.Identity.Name
+		<span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+		<li><a href="#">Profile</a></li>
+		<li class="divider"></li>
+		<li>@Html.ActionLink("Log Out", "LogOff", "Account")</li>
+	</ul>
 }
-else {
-    @:[ @Html.ActionLink("Log On", "LogOn", "Account") ]
+else
+{
+	<a class="btn" href="@Url.Action("LogOn", "Account")">
+		<i class="icon-user"></i> Log In
+	</a>
 }

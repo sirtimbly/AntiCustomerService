@@ -170,6 +170,8 @@
     <Content Include="Content\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\ui-lightness\jquery-ui-1.8.16.custom.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\background-gray.jpg" />
+    <Content Include="Images\container-bg.png" />
     <Content Include="Models\ServiceSystem.edmx.sql" />
     <Content Include="Release Notes - Microsoft.Web.Helpers.txt" />
     <Content Include="Scripts\bootstrap.js" />
@@ -275,7 +277,8 @@
     <Content Include="Views\Company\ListPicker.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Call\NewWizard.cshtml" />
-    <Content Include="Views\Issue\_Menu.cshtml" />
+    <Content Include="Views\Issue\Menu.cshtml" />
+    <Content Include="Views\Issue\Archived.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

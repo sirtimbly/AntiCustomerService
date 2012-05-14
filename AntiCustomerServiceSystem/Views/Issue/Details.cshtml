@@ -4,12 +4,11 @@
 	ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div class="well issue-header">
 	<div class="issue-actions">
-		<a href="@Url.Action("Archive", "Issue", new { issueId = Model.Id })"><i class="icon-folder-open"></i> Edit</a>
-		<a href="@Url.Action("Edit", "Issue", new { issueId = Model.Id })"><i class="icon-pencil"></i> Edit</a>
+		<a href="@Url.Action("Archive", "Issue", new { id = Model.Id })"><i class="icon-folder-open"></i> Archive</a>
+		<a href="@Url.Action("Edit", "Issue", new { id = Model.Id })"><i class="icon-pencil"></i> Edit</a>
 	</div>
 	<div class=" issue-title">
 		@Html.DisplayFor(model => model.Name)
@@ -48,17 +47,17 @@
 			<ul id="calls">
 				@foreach (AntiCustomerServiceSystem.Models.Call item in Model.Calls)
 				{
-				 <li><a href="/call/details/@item.Id">Call with @item.ServiceRep on @item.StartTime</a></li>
+				 <li><a href="@Url.Action("Details", "Call", item)">Call with @item.ServiceRep on @item.StartTime</a></li>
 				}
 			</ul>
 				@if (Model.Calls.Count() > 0)
 				 {
-					<div>@Html.ActionLink("Add Call", "Create", "Call", new { issueId = Model.Id }, null)</div>
+					<div>@Html.ActionLink("Add Call", "Create", "Call", new { issueId = Model.Id }, new { @class = "btn" })</div>
 				 }
-				 else 
-				 { 
-					<div>@Html.ActionLink("Log First Call", "Create", "Call", new { issueId = Model.Id }, null)</div>
-				 }
+	else
+	{ 
+					<div>@Html.ActionLink("Log First Call", "Create", "Call", new { issueId = Model.Id }, new { @class = "btn btn-success" })</div>
+	}
 	
 		</div>
 
@@ -74,7 +73,7 @@
 			}
 	
 		</ul>
-			<div>@Html.ActionLink("Add Company to Issue", "ListPicker", "Company", new { issueId = Model.Id }, null)</div>
+			<div>@Html.ActionLink("Add Company to Issue", "ListPicker", "Company", new { issueId = Model.Id }, new { @class = "btn" })</div>
 		</div>	
 
 		<div class="sub-item-container well">	
@@ -86,14 +85,9 @@
 				}
 			</ul>
 	
-			<div>@Html.ActionLink("Upload Document", "Create", "Document", new { issueId = Model.Id }, null)</div>
+			<div>@Html.ActionLink("Upload Document", "Create", "Document", new { issueId = Model.Id }, new { @class = "btn" })</div>
 
 		</div>	
 	</div>
 </div>
 
-
-<p>
-	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-	@Html.ActionLink("Back to List", "Index")
-</p>

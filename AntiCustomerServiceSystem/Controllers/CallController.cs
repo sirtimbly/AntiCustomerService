@@ -42,10 +42,11 @@ namespace AntiCustomerServiceSystem.Controllers
 
 		public ActionResult Create(int issueId)
 		{
-			ViewBag.IssueId = issueId;
+			
 			Call newCall = new Call()
 			{
-				StartTime = DateTime.Now
+				StartTime = DateTime.Now,
+				Issue = db.Issues.Find(issueId)
 			};
 			return View(newCall);
 		} 
