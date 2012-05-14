@@ -18,6 +18,7 @@ namespace AntiCustomerServiceSystem.Models
         {
             this.Issues = new HashSet<Issue>();
             this.Documents = new HashSet<Document>();
+            this.Calls = new HashSet<Call>();
         }
     
         public int Id { get; set; }
@@ -27,6 +28,7 @@ namespace AntiCustomerServiceSystem.Models
     
         public virtual ICollection<Issue> Issues { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Call> Calls { get; set; }
     }
     
 }

@@ -31,6 +31,10 @@
       <End Role="Document" EntitySet="Documents" />
       <End Role="Issue" EntitySet="Issues" />
     </AssociationSet>
+    <AssociationSet Name="CallCompany" Association="ServiceSystem.Store.CallCompany">
+      <End Role="Call" EntitySet="Calls" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Companies">
     <Key>
@@ -66,6 +70,7 @@
     <Property Name="Promises" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Resolution" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Issue_Id" Type="int" Nullable="false" />
+    <Property Name="Company_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Documents">
     <Key>
@@ -145,6 +150,18 @@
       </Principal>
       <Dependent Role="Document">
         <PropertyRef Name="Issue_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CallCompany">
+    <End Role="Call" Type="ServiceSystem.Store.Calls" Multiplicity="*" />
+    <End Role="Company" Type="ServiceSystem.Store.Companies" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Call">
+        <PropertyRef Name="Company_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

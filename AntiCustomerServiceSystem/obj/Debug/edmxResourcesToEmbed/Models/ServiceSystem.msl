@@ -100,5 +100,14 @@
       </EndProperty>
       <Condition ColumnName="Issue_Id" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="CallCompany" TypeName="ServiceSystem.CallCompany" StoreEntitySet="Calls">
+      <EndProperty Name="Company">
+        <ScalarProperty Name="Id" ColumnName="Company_Id" />
+      </EndProperty>
+      <EndProperty Name="Call">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Company_Id" IsNull="false" />
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

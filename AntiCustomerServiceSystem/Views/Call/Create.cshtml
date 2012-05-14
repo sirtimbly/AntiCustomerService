@@ -17,6 +17,25 @@
 		<input type="hidden" name="issueId" value="@Model.Issue.Id" />
 		<div class="control-group">
 			<div class="control-label">
+				@Html.LabelFor(model => model.Company)
+			</div>
+			<div class="controls">
+				@if (Model.Issue.Companies != null && Model.Issue.Companies.Count > 0)
+				{ 
+					@Html.DropDownListFor(model => model.Company, (List<SelectListItem>)ViewBag.CompanyList)
+				}
+				else 
+				{ 
+					<strong>No companies on this issue yet.</strong> 
+				}
+				<div>
+				<a href="@Url.Action("Create", "Company")" class="btn"><i class="icon-plus"></i> New Company</a> 
+				<a href="@Url.Action("ListPicker", "Company", new { issueId = Model.Issue.Id })" class="btn"><i class="icon-list-alt"></i> Choose Existing Company</a>
+				</div>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="control-label">
 				@Html.LabelFor(model => model.StartTime)
 			</div>
 			<div class="controls">

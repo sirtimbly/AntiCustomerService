@@ -42,12 +42,27 @@ namespace AntiCustomerServiceSystem.Controllers
 
 		public ActionResult Create(int issueId)
 		{
+			Issue issue = db.Issues.Find(issueId);
 			
 			Call newCall = new Call()
 			{
 				StartTime = DateTime.Now,
-				Issue = db.Issues.Find(issueId)
+				Issue = issue
 			};
+			if (issue != null && issue.Companies != null)
+			{
+				List<SelectListItem> companyList = new List<SelectListItem>();
+				foreach (Company item in issue.Companies)
+				{
+					SelectListItem entry = new SelectListItem
+					{
+						Text = item.Name,
+						Value = item.Id.ToString()
+					};
+					companyList.Add(entry);
+				}
+				ViewBag.CompanyList = companyList;
+			}
 			return View(newCall);
 		} 
 
@@ -61,8 +76,10 @@ namespace AntiCustomerServiceSystem.Controllers
 			if (ModelState.IsValid)
 			{
 				if (issueId > 0)
+				{
 					call.Issue = db.Issues.Where(i => i.Id == issueId).FirstOrDefault();
-
+					call.Issue.Modified = DateTime.Now;
+				}
 				db.Calls.Add(call);
 				db.SaveChanges();
 				return RedirectToAction("Details", "Issue", db.Issues.Find(issueId));  

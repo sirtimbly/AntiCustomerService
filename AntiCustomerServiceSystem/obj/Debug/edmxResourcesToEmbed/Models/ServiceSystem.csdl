@@ -26,6 +26,10 @@
       <End Role="Document" EntitySet="Documents" />
       <End Role="Issue" EntitySet="Issues" />
     </AssociationSet>
+    <AssociationSet Name="CallCompany" Association="ServiceSystem.CallCompany">
+      <End Role="Call" EntitySet="Calls" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Company">
     <Key>
@@ -37,6 +41,7 @@
     <Property Type="String" Name="Account" Nullable="true" />
     <NavigationProperty Name="Issues" Relationship="ServiceSystem.CompanyIssue" FromRole="Company" ToRole="Issue" />
     <NavigationProperty Name="Documents" Relationship="ServiceSystem.CompanyDocument" FromRole="Company" ToRole="Document" />
+    <NavigationProperty Name="Calls" Relationship="ServiceSystem.CallCompany" FromRole="Company" ToRole="Call" />
   </EntityType>
   <EntityType Name="Issue">
     <Key>
@@ -71,6 +76,7 @@
     <Property Type="String" Name="Resolution" Nullable="true" />
     <NavigationProperty Name="Issue" Relationship="ServiceSystem.IssueCall" FromRole="Call" ToRole="Issue" />
     <NavigationProperty Name="FollowUps" Relationship="ServiceSystem.CallFollowUp" FromRole="Call" ToRole="FollowUp" />
+    <NavigationProperty Name="Company" Relationship="ServiceSystem.CallCompany" FromRole="Call" ToRole="Company" />
   </EntityType>
   <Association Name="IssueCall">
     <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="1">
@@ -112,5 +118,9 @@
   <Association Name="DocumentIssue">
     <End Type="ServiceSystem.Document" Role="Document" Multiplicity="*" />
     <End Type="ServiceSystem.Issue" Role="Issue" Multiplicity="0..1" />
+  </Association>
+  <Association Name="CallCompany">
+    <End Type="ServiceSystem.Call" Role="Call" Multiplicity="*" />
+    <End Type="ServiceSystem.Company" Role="Company" Multiplicity="0..1" />
   </Association>
 </Schema>

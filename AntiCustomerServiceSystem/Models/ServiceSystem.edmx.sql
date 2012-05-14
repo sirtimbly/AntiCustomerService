@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/08/2011 16:08:12
+-- Date Created: 05/13/2012 23:36:02
 -- Generated from EDMX file: C:\git\AntiCustomerServiceSystem\AntiCustomerServiceSystem\Models\ServiceSystem.edmx
 -- --------------------------------------------------
 
@@ -31,6 +31,9 @@ IF OBJECT_ID(N'[dbo].[FK_CompanyDocument]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_CallFollowUp]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FollowUps] DROP CONSTRAINT [FK_CallFollowUp];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DocumentIssue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Documents] DROP CONSTRAINT [FK_DocumentIssue];
 GO
 
 -- --------------------------------------------------
@@ -91,7 +94,8 @@ CREATE TABLE [dbo].[Calls] (
     [Notes] nvarchar(max)  NULL,
     [Promises] nvarchar(max)  NULL,
     [Resolution] nvarchar(max)  NULL,
-    [Issue_Id] int  NOT NULL
+    [Issue_Id] int  NOT NULL,
+    [Company_Id] int  NULL
 );
 GO
 
@@ -244,6 +248,20 @@ ADD CONSTRAINT [FK_DocumentIssue]
 CREATE INDEX [IX_FK_DocumentIssue]
 ON [dbo].[Documents]
     ([Issue_Id]);
+GO
+
+-- Creating foreign key on [Company_Id] in table 'Calls'
+ALTER TABLE [dbo].[Calls]
+ADD CONSTRAINT [FK_CallCompany]
+    FOREIGN KEY ([Company_Id])
+    REFERENCES [dbo].[Companies]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CallCompany'
+CREATE INDEX [IX_FK_CallCompany]
+ON [dbo].[Calls]
+    ([Company_Id]);
 GO
 
 -- --------------------------------------------------

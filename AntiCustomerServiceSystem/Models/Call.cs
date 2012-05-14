@@ -30,6 +30,7 @@ namespace AntiCustomerServiceSystem.Models
     
         public virtual Issue Issue { get; set; }
         public virtual ICollection<FollowUp> FollowUps { get; set; }
+        public virtual Company Company { get; set; }
     }
     
 }
